@@ -104,9 +104,8 @@ CREATE TABLE tournament_stage (
 		);
 
 CREATE TABLE stage_participant ( 
-	id_Participant BIGINT( 15 ) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	id_Stage INT( 10 ) NOT NULL,
-	Participant_email VARCHAR( 40 ) NOT NULL,
+	Participant_email VARCHAR( 40 ) NOT NULL PRIMARY KEY,
 	CHECK ( Participant_email REGEXP '\w+@[a-z]{1,6}\.[a-z]{2-4}' ),
 	FOREIGN KEY ( Participant_email ) REFERENCES user ( Email ),
 	FOREIGN KEY ( id_Stage ) REFERENCES tournament_stage ( id_Stage )
