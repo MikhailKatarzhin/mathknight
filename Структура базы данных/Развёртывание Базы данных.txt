@@ -1,0 +1,124 @@
+CREATE DATABASE mathknight;
+USE mathknight;
+
+CREATE TABLE role ( 
+	id_Role INT( 2 ) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	Role_name VARCHAR( 20 ) NOT NULL
+		);
+
+INSERT INTO
+	role ( Role_name )
+VALUES
+	( 'Administrator' ),
+	( 'User' ),
+	( 'Destroyed' )
+	;
+
+CREATE TABLE user ( 
+	Email VARCHAR( 40 ) NOT NULL PRIMARY KEY,
+	Password_hash VARCHAR( 32 ) NOT NULL,
+	id_Role int( 2 ) NOT NULL DEFAULT '2',
+	Rank int( 2 ) NOT NULL DEFAULT '0',
+	CHECK ( Email REGEXP '\w+@[a-z]{1,6}\.[a-z]{2-4}' ),
+	CHECK ( Password_hash REGEXP '\w{32}' ),
+	FOREIGN KEY ( id_Role ) REFERENCES role ( id_Role )
+		);
+
+INSERT INTO
+	user ( Email, Password_hash, id_Role )
+VALUES
+	( 'maikl.1997@mail.ru', 'd8046517c191c38141d4971966d78a2c', 1 )
+	;
+INSERT INTO
+	user ( Email, Password_hash )
+VALUES
+	( 'varptelion@gmail.com', '6af8be38809df10a0c5d543872e27b73' )
+	;
+
+CREATE TABLE personality ( 
+	Email VARCHAR( 40 ) NOT NULL PRIMARY KEY,
+	First_name VARCHAR( 20 ) NOT NULL,
+	Second_name VARCHAR( 20 ) NOT NULL,
+	Patronymic VARCHAR( 20 ),
+	Nickname VARCHAR( 20 ),
+	Birth_date DATE NOT NULL,
+	CHECK ( Email REGEXP '\w+@[a-z]{1,6}\.[a-z]{2-4}' ),
+	CHECK ( First_name REGEXP '\w{3,20}' ),
+	CHECK ( Second_name REGEXP '\w{3,20}' ),
+	CHECK ( Patronymic REGEXP '\w{,20}' ),
+	CHECK ( Nickname REGEXP '\w{,20}' ),
+	FOREIGN KEY ( Email ) REFERENCES user ( Email )
+		);
+
+INSERT INTO
+	personality ( Email, First_name, Second_name, Birth_date )
+VALUES
+	( 'maikl.1997@mail.ru', 'Administrator', 'Pervich', '2020-06-01' ),
+	( 'varptelion@gmail.com', 'Michael', 'Katarzhin', '1997-10-20' )
+	;
+
+CREATE TABLE user_settings ( 
+	Email VARCHAR( 40 ) NOT NULL PRIMARY KEY,
+	own_physical_value int( 2 ) NOT NULL DEFAULT 1,
+	own_mental_value int( 2 ) NOT NULL DEFAULT 1,
+	enemy_physical_value int( 2 ) NOT NULL DEFAULT 1,
+	enemy_mental_value int( 2 ) NOT NULL DEFAULT 1,
+	CHECK ( Email REGEXP '\w+@[a-z]{1,6}\.[a-z]{2-4}' ),
+	CHECK ( own_physical_value > 0 AND own_physical_value < 21 ),
+	CHECK ( own_mental_value > 0 AND own_mental_value < 21 ),
+	CHECK ( enemy_physical_value > 0 AND enemy_physical_value < 21 ),
+	CHECK ( enemy_mental_value > 0 AND enemy_mental_value < 21 ),
+	FOREIGN KEY ( Email ) REFERENCES user ( Email )
+		);
+
+INSERT INTO
+	user_settings ( Email )
+VALUES
+	( 'maikl.1997@mail.ru' ),
+	( 'varptelion@gmail.com' )
+	;
+
+CREATE TABLE priority_enemy ( 
+	Own_Email VARCHAR( 40 ) NOT NULL,
+	Enemy_Email VARCHAR( 40 ) NOT NULL,
+	id_priority BIGINT( 15 ) NOT NULL PRIMARY KEY,
+	FOREIGN KEY ( Own_Email ) REFERENCES user ( Email ),
+	FOREIGN KEY ( Enemy_Email ) REFERENCES user ( Email )
+		);
+
+CREATE TABLE tournament ( 
+	id_Tournament INT( 10 ) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	Title VARCHAR( 20 ) NOT NULL UNIQUE,
+	Date_start DATE NOT NULL UNIQUE
+		);
+
+CREATE TABLE tournament_stage ( 
+	id_Stage INT( 10 ) NOT NULL PRIMARY KEY,
+	id_Tournament INT( 10 ) NOT NULL,
+	Stage_rank INT( 2 ) NOT NULL,
+	Count_participants INT( 15 ) NOT NULL,
+	Date_end DATE NOT NULL,
+	CHECK ( Stage_rank >= 0 ),
+	CHECK ( Count_participants >= 0 ),
+	FOREIGN KEY ( id_Tournament ) REFERENCES tournament ( id_Tournament )
+		);
+
+CREATE TABLE stage_participant ( 
+	id_Participant BIGINT( 15 ) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_Stage INT( 10 ) NOT NULL,
+	Participant_email VARCHAR( 40 ) NOT NULL,
+	CHECK ( Participant_email REGEXP '\w+@[a-z]{1,6}\.[a-z]{2-4}' ),
+	FOREIGN KEY ( Participant_email ) REFERENCES user ( Email ),
+	FOREIGN KEY ( id_Stage ) REFERENCES tournament_stage ( id_Stage )
+		);
+
+CREATE TABLE battle ( 
+	id_Battle INT( 10 ) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	Battle_time BIGINT( 15 ) NOT NULL,
+	Left_participant_email VARCHAR( 40 ) NOT NULL,
+	Right_participant_email VARCHAR( 40 ) NOT NULL,
+	CHECK ( Left_participant_email REGEXP '\w+@[a-z]{1,6}\.[a-z]{2-4}' ),
+	FOREIGN KEY ( Left_participant_email ) REFERENCES user ( Email ),
+	CHECK ( Right_participant_email REGEXP '\w+@[a-z]{1,6}\.[a-z]{2-4}' ),
+	FOREIGN KEY ( Right_participant_email ) REFERENCES user ( Email )
+		);
