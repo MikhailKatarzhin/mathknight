@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="Registration">User Registration Page</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+  <h1 th:text="${'User Registration'}">User Login Page</h1>
+
+  <form th:action="@{/user/registration}" method="post" th:object="${userForm}">
+      <div>
+        <label>Имя </label>
+        <input type="text" th:field="*{secondName}">&nbsp;<span th:errors="*{secondName}"></span>
+      </div>
+
+      <div>
+        <label>Фамилия </label>
+        <input type="text" th:field="*{firstName}">&nbsp;<span th:errors="*{firstName}"></span>
+      </div>
+
+      <div>
+        <label>Отчество </label>
+        <input type="text" th:field="*{patronymic}">&nbsp;<span th:errors="*{patronymic}"></span>
+      </div>
+
+      <div>
+        <label>Псевдоним </label>
+        <input type="text" th:field="*{nickname}">&nbsp;<span th:errors="*{nickname}"></span>
+      </div>
+
+      <div>
+        <label>Электронный адрес </label>
+        <input type="text" th:field="*{email}">&nbsp;<span th:errors="*{email}"></span>
+      </div>
+
+      <div>
+        <label>Пароль </label>
+        <input type="password" th:field="*{password}">&nbsp;<span th:errors="*{password}"></span>
+      </div>
+
+      <div>
+        <label>Дата рождения </label>
+        <input type="date" th:field="*{birthdate}">&nbsp;<span th:errors="*{birthdate}"></span>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" name="login-submit" id="login-submit"
+               class="stdBtn" value="Log In">
+      </div>
+  </form>
+</th:block>
+</body>
+</html>
