@@ -57,7 +57,7 @@ public class Authentication implements IAuthenticationJWT{
             try {
                 Long id_personality = personalityRepository.save(new Personality(
                         request.getFirst_name(), request.getSecond_name(), request.getPatronymic()
-                        , request.getNickname(), request.getBirth_date())).getId();
+                        , request.getNickname(), request.getBirthdate())).getId();
                 try {
                     User tempUser = userRepository.findUserByEmail(request.getEmail());
                     Long id_ImpactSet = impactSetRepository.save(new ImpactSet()).getId();

@@ -2,8 +2,6 @@ package knz.mathknigt.restApi.identyfication;
 
 import lombok.*;
 
-import java.util.Date;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -15,5 +13,5 @@ public class SignUpRequest {
     @NonNull private String second_name;
     @NonNull private String patronymic;
     @NonNull private String nickname;
-    @NonNull private Date   birth_date;
+    @NonNull private String birthdate;
 }
