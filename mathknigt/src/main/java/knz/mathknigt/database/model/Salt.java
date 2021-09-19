@@ -22,4 +22,8 @@ public class Salt {
 
     @OneToOne(mappedBy = "salt", cascade = CascadeType.ALL, orphanRemoval = true)
     private User    user;
+
+    public Salt(String salt){
+        this.salt   = salt;
+    }
 }

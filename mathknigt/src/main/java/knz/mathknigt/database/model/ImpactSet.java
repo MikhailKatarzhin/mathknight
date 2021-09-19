@@ -1,6 +1,6 @@
 package knz.mathknigt.database.model;
 
-import knz.mathknigt.Config;
+import knz.mathknigt.configs.ConfigConstants;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,8 +28,8 @@ public class ImpactSet {
 
     void setPhysical_value(@NonNull Long inphysical_value){
         try {
-            if (inphysical_value < Config.MINIMALPHYSICALIMPACTVALUE
-            || inphysical_value > Config.MAXIMALPHYSICALIMPACTVALUE) throw new Exception();
+            if (inphysical_value < ConfigConstants.MINIMALPHYSICALIMPACTVALUE
+            || inphysical_value > ConfigConstants.MAXIMALPHYSICALIMPACTVALUE) throw new Exception();
             this.physical_value = inphysical_value;
         }catch (Exception exception){
             exception.printStackTrace();
@@ -38,8 +38,8 @@ public class ImpactSet {
 
     void setMental_value(@NonNull Long inMental_value){
         try {
-            if (inMental_value < Config.MINIMALMENTALIMPACTVALUE
-            || inMental_value > Config.MAXIMALMENTALIMPACTVALUE) throw new Exception();
+            if (inMental_value < ConfigConstants.MINIMALMENTALIMPACTVALUE
+            || inMental_value > ConfigConstants.MAXIMALMENTALIMPACTVALUE) throw new Exception();
             this.physical_value = inMental_value;
         }catch (Exception exception){
             exception.printStackTrace();
