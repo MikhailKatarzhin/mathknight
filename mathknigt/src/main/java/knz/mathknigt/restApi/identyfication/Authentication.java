@@ -6,6 +6,7 @@ import knz.mathknigt.restApi.DefaultResponse;
 import lombok.NonNull;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +37,7 @@ public class Authentication implements IAuthenticationJWT{
         this.impactSetRepository    = impactSetRepository;
         this.personalityRepository  = personalityRepository;
     }
+
 
     public JWTPayload checkAuthentication(HttpServletRequest request) {
         if (request.getCookies() == null)
@@ -117,4 +119,12 @@ public class Authentication implements IAuthenticationJWT{
         return new DefaultResponse("Successful signed in", "200");
     }
 
+    @GetMapping("/signouts")
+    public DefaultResponse sign_out(HttpServletResponse response){
+        Cookie cookie = new Cookie(authCookieName, "0");
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return new DefaultResponse("Successful signed out", "200");
+    }
 }

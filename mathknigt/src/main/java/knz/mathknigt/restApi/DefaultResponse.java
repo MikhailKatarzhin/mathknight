@@ -7,7 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 public class DefaultResponse {
-    @NonNull
-    private String status;
+    @NonNull private String status;
     @NonNull private String key;
 }
