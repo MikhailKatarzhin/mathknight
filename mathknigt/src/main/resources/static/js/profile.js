@@ -7,12 +7,14 @@ window.onload = function fillProfileInfo(){
             console.log(data.toString());
             switch (data.key){
                 case "200":{
-                    document.getElementById("firstname").innerHTML = data.first_name;
-                    document.getElementById("secondname").innerHTML = data.second_name;
-                    document.getElementById("patronymic").innerHTML = data.patronymic;
-                    document.getElementById("nickname").innerHTML = data.nickname;
-                    document.getElementById("birthdate").innerHTML = data.birthdate;
-
+                    document.getElementById("firstname").innerHTML  = "Имя: " + data.first_name;
+                    document.getElementById("secondname").innerHTML = "Фамилия: " + data.second_name;
+                    document.getElementById("patronymic").innerHTML = "Отчество: " + data.patronymic;
+                    document.getElementById("nickname").innerHTML   = "Псевдоним: " + data.nickname;
+                    document.getElementById("birthdate").innerHTML  = "Дата рождения: " + data.birthdate;
+                    document.getElementById("grade").innerHTML      = "Ранг: " + data.grade;
+                    $('#physImp').val(data.physical_value);
+                    $('#mentImp').val(data.mental_value);
                     break;
                 }
                 default:{
