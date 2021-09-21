@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль / Profile</title>
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <button type="button" id="sign_out" name="sign_out">Выход</button>
+    <button type="button" class="button1" name="battle_selection" id="battle_selection">Подбор сражения</button>
+
+    <div class="rival_impact">
+        <h1 class="h1">Соперника возможности</h1>
+
+        <table class="table">
+            <tr>
+                <td>Физическая атака:</td>
+                <td th:text="$impactSet.physical_value">Physical Value</td>
+            </tr>
+            <tr>
+                <td>Ментальная атака:</td>
+                <td th:text="$impactSet.mental_value">Mental Value</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="own_impact">
+        <h1 class="h2">Собственные возможности</h1>
+        <table class="table">
+            <tr>
+                <td>Физическая атака:</td>
+                <td th:text="$impactSet.physical_value">Physical Value</td>
+            </tr>
+            <tr>
+                <td>Ментальная атака:</td>
+                <td th:text="$impactSet.mental_value">Mental Value</td>
+            </tr>
+        </table>
+    </div>
+
+    <button type="button" class="button3" id="appeal" name="appeal">Призвать к сражению</button>
+
+    <div class="button2">
+        <p>
+            <button type="button" id="search" name="search">Поиск бойцов</button>
+        </p>
+        <p>
+            <button type="button" id="main" name="main">Главная страница</button>
+        </p>
+    </div>
+</body>
+</html>
