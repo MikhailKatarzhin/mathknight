@@ -20,4 +20,8 @@ public class PageController {
     public String signinPage(){
         return "signin";
     }
+    @GetMapping("/profile")
+    public String profilePage(){
+        return "profile";
+    }
 }
