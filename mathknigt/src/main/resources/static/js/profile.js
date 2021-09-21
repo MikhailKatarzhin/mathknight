@@ -59,3 +59,33 @@ function checkSuccessSO(data){
         }
     }
 }
+
+function setPhysImp(){
+    let physImp = document.getElementById("physImp").value
+
+    if (physImp > 0 && physImp < 21){
+        $.ajax({
+            url: '/impactSet/set/physical',
+            method: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({
+                "newValue": physImp
+            })
+        })
+    }
+}
+
+function setMentImp(){
+    let mentImp = document.getElementById("mentImp").value
+
+    if (physImp > 0 && physImp < 21){
+        $.ajax({
+            url: '/impactSet/set/mental',
+            method: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({
+                "newValue": mentImp
+            })
+        })
+    }
+}

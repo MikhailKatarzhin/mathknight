@@ -26,7 +26,7 @@ public class ImpactSet {
     @OneToOne(mappedBy = "impact_set", cascade = CascadeType.ALL)
     private User    user;
 
-    void setPhysical_value(@NonNull Long inphysical_value){
+    public void setPhysical_value(@NonNull Long inphysical_value){
         try {
             if (inphysical_value < ConfigConstants.MINIMALPHYSICALIMPACTVALUE
             || inphysical_value > ConfigConstants.MAXIMALPHYSICALIMPACTVALUE) throw new Exception();
@@ -36,7 +36,7 @@ public class ImpactSet {
         }
     }
 
-    void setMental_value(@NonNull Long inMental_value){
+    public void setMental_value(@NonNull Long inMental_value){
         try {
             if (inMental_value < ConfigConstants.MINIMALMENTALIMPACTVALUE
             || inMental_value > ConfigConstants.MAXIMALMENTALIMPACTVALUE) throw new Exception();
