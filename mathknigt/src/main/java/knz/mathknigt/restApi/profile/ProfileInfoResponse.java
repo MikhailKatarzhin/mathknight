@@ -13,23 +13,23 @@ public class ProfileInfoResponse {
     @NonNull private String patronymic;
     @NonNull private String nickname;
     @NonNull private String birthdate;
-    @NonNull private int    grade;
-    @NonNull private int    physical_value;
-    @NonNull private int    mental_value;
-    @NonNull private int    role_id;
+    @NonNull private String grade;
+    @NonNull private String physical_value;
+    @NonNull private String mental_value;
+    @NonNull private String role_id;
 
     public ProfileInfoResponse(){
-        status          = "Bad request";
-        key             = "400";
+        this.status     = "Bad request";
+        this.key        = "400";
         first_name      = "NoN";
         second_name     = "NoN";
         patronymic      = "NoN";
         nickname        = "NoN";
         birthdate       = "NoN";
-        grade           = 0;
-        physical_value  = 0;
-        mental_value    = 0;
-        role_id         = 0;
+        grade           = "0";
+        physical_value  = "0";
+        mental_value    = "0";
+        role_id         = "0";
     }
     public ProfileInfoResponse(String status, String key){
         this.status     = status;
@@ -39,13 +39,13 @@ public class ProfileInfoResponse {
         patronymic      = "NoN";
         nickname        = "NoN";
         birthdate       = "NoN";
-        grade           = 0;
-        physical_value  = 0;
-        mental_value    = 0;
-        role_id         = 0;
+        grade           = "0";
+        physical_value  = "0";
+        mental_value    = "0";
+        role_id         = "0";
     }
     public ProfileInfoResponse(String first_name, String second_name, String patronymic, String nickname
-            , String birthdate, int grade, int physical_value, int mental_value, int role_id){
+            , String birthdate, String grade, String physical_value, String mental_value, String role_id){
         status              = "Ok";
         key                 = "200";
         this.first_name     = first_name;
@@ -59,7 +59,7 @@ public class ProfileInfoResponse {
         this.role_id        = role_id;
     }
     public ProfileInfoResponse(String first_name, String second_name, String patronymic, String nickname
-            , String birthdate, int grade, int physical_value, int mental_value){
+            , String birthdate, String grade, String physical_value, String mental_value){
         status              = "Ok";
         key                 = "200";
         this.first_name     = first_name;
@@ -70,6 +70,6 @@ public class ProfileInfoResponse {
         this.grade          = grade;
         this.physical_value = physical_value;
         this.mental_value   = mental_value;
-        this.role_id        = 1;
+        this.role_id        = "1";
     }
 }

@@ -1,7 +1,29 @@
-function checkauth(){
+window.onload = function fillProfileInfo(){
     $.ajax({
+        url: '/profile/my',
+        method: 'GET',
+        contentType: "application/json",
+        success: function (data) {
+            console.log(data.toString());
+            switch (data.key){
+                case "200":{
+                    document.getElementById("firstname").innerHTML = data.first_name;
+                    document.getElementById("secondname").innerHTML = data.second_name;
+                    document.getElementById("patronymic").innerHTML = data.patronymic;
+                    document.getElementById("nickname").innerHTML = data.nickname;
+                    document.getElementById("birthdate").innerHTML = data.birthdate;
 
-    })
+                    break;
+                }
+                default:{
+                    signout();
+                }
+            }
+        },
+        error: function (){
+            signout();
+        }
+    }, 60);
 }
 
 function signout(){
@@ -13,7 +35,7 @@ function signout(){
             checkSuccessSO(data);
         },
         error: function (data){
-            alert(data.status);
+            alert("Error" + data.key + " " + data.status);
         }
     })
 }

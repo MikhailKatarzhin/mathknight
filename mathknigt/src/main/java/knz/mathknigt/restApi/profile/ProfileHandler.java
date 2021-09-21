@@ -1,5 +1,11 @@
 package knz.mathknigt.restApi.profile;
 
+import knz.mathknigt.database.model.ImpactSet;
+import knz.mathknigt.database.model.Personality;
+import knz.mathknigt.database.model.User;
+import knz.mathknigt.database.repository.ImpactSetRepository;
+import knz.mathknigt.database.repository.PersonalityRepository;
+import knz.mathknigt.database.repository.UserRepository;
 import knz.mathknigt.restApi.identyfication.IAuthenticationJWT;
 import knz.mathknigt.restApi.identyfication.JWTPayload;
 import lombok.AllArgsConstructor;
@@ -12,14 +18,25 @@ import javax.servlet.http.HttpServletRequest;
 @AllArgsConstructor
 public class ProfileHandler {
 
-    final IAuthenticationJWT iAuthenticateJWT;
+    final IAuthenticationJWT    iAuthenticateJWT;
+    final UserRepository        userRepository;
 
     @GetMapping("/profile/my")
-    public ProfileInfoResponse getCountResolvedProblems(HttpServletRequest request){
+    public ProfileInfoResponse fillProfileInfo(HttpServletRequest request){
         JWTPayload jwtPayload   = iAuthenticateJWT.checkAuthentication(request);
-        if(jwtPayload == null)
-            return new ProfileInfoResponse();
+        if (jwtPayload == null)
+            return new ProfileInfoResponse("Unauthorized", "401");
 
-        return new ProfileInfoResponse();
+        User user = userRepository.findUserByEmail(jwtPayload.getEmail());
+        if (user == null)
+            return new ProfileInfoResponse("Unauthorized", "401");
+
+        Personality personality = user.getPersonality();
+        ImpactSet impactSet     = user.getImpact_set();
+
+        return new ProfileInfoResponse(personality.getFirst_name(), personality.getSecond_name()
+                , personality.getPatronymic(), personality.getNickname(), personality.getBirthdate()
+                , user.getGrade().toString()
+                , impactSet.getPhysical_value().toString(), impactSet.getMental_value().toString());
     }
 }
