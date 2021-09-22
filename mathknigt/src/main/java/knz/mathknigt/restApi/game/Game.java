@@ -1,34 +1,46 @@
 package knz.mathknigt.restApi.game;
 
 import knz.mathknigt.database.model.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@AllArgsConstructor
+@Getter
 public class Game {
-    User    userLeft;
-    User    userRight;
-    Knight  knightLeft;
-    Knight  knightRight;
+    List<User>      users;
+    List<Knight>    knights;
     boolean roundIsLeft;
     long    potential;
 
     public Game(Long potential){
         roundIsLeft     = true;
-        this.userLeft   = null;
-        this.userRight  = null;
+        this.users      = new ArrayList<>();
+        this.knights    = new ArrayList<>();
         this.potential  = potential;
     }
 
-    public void join(User newUser){
-        if (userLeft == null)
-            userLeft = newUser;
-        else
-        if (userRight == null)
-            userRight = newUser;
+    public boolean join(User newUser){
+        if (users.contains(newUser) || users.size() > 1)
+            return false;
+        users.add(newUser);
+        return true;
     }
 
-    public void leave(User user){
-        if (user == userLeft)
-            userLeft    = null;
-        if (user == userRight)
-            userRight   = null;
+    public boolean leave(User user){
+        if (!users.contains(user))
+            return false;
+        users.remove(user);
+        return true;
     }
+
+    public boolean leaveById(int id){
+        if (id < 0 || id > 1)
+            return false;
+        users.remove(id);
+        return true;
+    }
+
 }
