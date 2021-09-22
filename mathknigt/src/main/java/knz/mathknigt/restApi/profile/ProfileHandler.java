@@ -4,7 +4,6 @@ import knz.mathknigt.database.model.ImpactSet;
 import knz.mathknigt.database.model.Personality;
 import knz.mathknigt.database.model.User;
 import knz.mathknigt.database.repository.ImpactSetRepository;
-import knz.mathknigt.database.repository.PersonalityRepository;
 import knz.mathknigt.database.repository.UserRepository;
 import knz.mathknigt.restApi.identyfication.IAuthenticationJWT;
 import knz.mathknigt.restApi.identyfication.JWTPayload;

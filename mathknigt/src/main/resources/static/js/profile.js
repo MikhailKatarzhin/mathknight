@@ -1,4 +1,9 @@
-window.onload = function fillProfileInfo(){
+
+let inWork = false;
+setInterval(function fillProfileInfo(){
+    if (inWork === true)
+        return;
+    inWork = true;
     $.ajax({
         url: '/profile/my',
         method: 'GET',
@@ -15,18 +20,21 @@ window.onload = function fillProfileInfo(){
                     document.getElementById("grade").innerHTML      = "Ранг: " + data.grade;
                     $('#physImp').val(data.physical_value);
                     $('#mentImp').val(data.mental_value);
+                    inWork = false;
                     break;
                 }
                 default:{
                     signout();
+                    inWork = false;
                 }
             }
         },
         error: function (){
             signout();
+            inWork = false;
         }
-    }, 60);
-}
+    });
+}, 1000 * 5);
 
 function signout(){
     $.ajax({
