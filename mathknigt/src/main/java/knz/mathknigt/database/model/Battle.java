@@ -24,6 +24,30 @@ public class Battle {
     @Column(name = "rounds", nullable = false)
     private Long        rounds;
 
+    @Setter
+    @Column(name = "problem_left")
+    private Long        problem_left;
+
+    @Setter
+    @Column(name = "problem_right")
+    private Long        problem_right;
+
+    @Setter
+    @Column(name = "resolve_left")
+    private Long        resolve_left;
+
+    @Setter
+    @Column(name = "resolve_right")
+    private Long        resolve_right;
+
+    @Setter
+    @Column(name = "stamina_left")
+    private Long        stamina_left;
+
+    @Setter
+    @Column(name = "stamina_right")
+    private Long        stamina_right;
+
     public void addUser(@NonNull User user){
         try {
             if (this.users.contains(user) || user.getBattle() != null) throw new IllegalArgumentException();
