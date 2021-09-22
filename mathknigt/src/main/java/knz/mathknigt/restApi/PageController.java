@@ -24,4 +24,8 @@ public class PageController {
     public String profilePage(){
         return "profile";
     }
+    @GetMapping("/game")
+    public String gameroomPage(){
+        return "gameroom";
+    }
 }
